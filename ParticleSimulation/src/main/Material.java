@@ -5,7 +5,7 @@
  */
 package main;
 
-import dev.Vec4;
+import glm.vec._4.Vec4;
 
 /**
  *

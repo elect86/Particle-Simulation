@@ -11,6 +11,7 @@ import com.jogamp.newt.NewtFactory;
 import com.jogamp.newt.Screen;
 import com.jogamp.newt.opengl.GLWindow;
 import com.jogamp.opengl.GLCapabilities;
+import com.jogamp.opengl.GLContext;
 import com.jogamp.opengl.GLProfile;
 import com.jogamp.opengl.util.Animator;
 
@@ -20,8 +21,13 @@ import com.jogamp.opengl.util.Animator;
  */
 public class ParticleSimulation {
 
+    public static void main(String[] args) {
+        new ParticleSimulation();
+    }
+
     private static int screenIdx = 0;
-    private static Dimension windowSize = new Dimension(1920, 1080);
+//    private static Dimension windowSize = new Dimension(1920, 1080);
+    private static Dimension windowSize = new Dimension(640, 480);
     private static boolean undecorated = false;
     private static boolean alwaysOnTop = false;
     private static boolean fullscreen = false;
@@ -32,6 +38,7 @@ public class ParticleSimulation {
     public static Animator animator;
 
     public ParticleSimulation() {
+
         Display display = NewtFactory.createDisplay(null);
         Screen screen = NewtFactory.createScreen(display, screenIdx);
         GLProfile glProfile = GLProfile.get(GLProfile.GL4);
@@ -48,12 +55,12 @@ public class ParticleSimulation {
         glWindow.setTitle(title);
         glWindow.setVisible(true);
 
-        ParticleSimulation particleSimulation = new ParticleSimulation();
         glWindow.addGLEventListener(new OpenGlListener());
 //        glWindow.addKeyListener(particleSimulation);
 
         animator = new Animator(glWindow);
-        animator.setRunAsFastAsPossible(true);
+        animator.setRunAsFastAsPossible(false);
+        animator.setUpdateFPSFrames(1000, System.out);
         animator.start();
     }
 
